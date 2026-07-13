@@ -1,30 +1,26 @@
 export const theme = {
   colors: {
-    primary: '#1E90FF', // Vibrant Blue
-    secondary: '#87CEFA', // Light Blue
-    background: '#F0F8FF', // Alice Blue (very light white-blue)
-    surface: '#FFFFFF', // Clean White
-    text: '#333333', // Dark text for readability
-    textLight: '#888888',
-    accent: '#00BFFF',
-    danger: '#FF6347',
-    success: '#32CD32',
+    primary: '#0052cc', // Vibrant Blue
+    secondary: '#e6f0ff', // Light Blue tint
+    background: '#ffffff', // Pure White
+    surface: '#f8f9fa', // Off-white for cards
+    text: '#333333',
+    danger: '#dc3545',
+    warning: '#ffc107',
+    success: '#28a745'
   },
   typography: {
-    fontFamily: 'System', // Uses native font
-    h1: { fontSize: 32, fontWeight: 'bold', color: '#333' },
-    h2: { fontSize: 24, fontWeight: 'bold', color: '#333' },
-    h3: { fontSize: 18, fontWeight: '600', color: '#333' },
-    body: { fontSize: 16, color: '#333' },
-    caption: { fontSize: 14, color: '#888' },
+    header: { fontSize: 24, fontWeight: 'bold' },
+    body: { fontSize: 16, lineHeight: 24 },
+    caption: { fontSize: 12, color: '#666' }
   },
   shadows: {
     soft: {
-      shadowColor: '#1E90FF',
+      shadowColor: '#0052cc',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.1,
       shadowRadius: 10,
-      elevation: 5,
+      elevation: 5
     }
   }
 };
