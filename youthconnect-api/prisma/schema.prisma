@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?  @unique
+  phone     String   @unique
+  role      Role     @default(PATIENT)
+  birthDate DateTime?
+  createdAt DateTime @default(now())
+
+  appointments Appointment[]
+  messages     Message[]
+}
+
+model Appointment {
+  id        String   @id @default(uuid())
+  userId    String
+  doctorId  String
+  date      DateTime
+  status    String   @default("PENDING") // PENDING, CONFIRMED, COMPLETED, CANCELLED
+  type      String   // VIDEO, AUDIO, CHAT
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  userId    String
+  text      String
+  isFromAI  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+  ADMIN
+}
