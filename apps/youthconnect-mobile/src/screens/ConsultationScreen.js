@@ -4,7 +4,7 @@ import { theme } from '../theme/theme';
 import { SyncEngine } from '../services/SyncEngine';
 import NetInfo from '@react-native-community/netinfo';
 
-export default function ConsultationScreen() {
+export default function ConsultationScreen({ navigation }) {
   const [doctors, setDoctors] = useState([
     { id: '1', name: 'Dr. Anya Sharma', specialty: 'Pediatrician', nextAvailable: '10:00 AM' },
     { id: '2', name: 'Dr. Benjamin Lee', specialty: 'Adolescent Medicine', nextAvailable: '1:45 PM' }
@@ -26,8 +26,10 @@ export default function ConsultationScreen() {
       );
       await SyncEngine.enqueueAction('book_appointment', { doctorId, date: new Date().toISOString() });
     } else {
-      Alert.alert('Success', `Appointment booked successfully with ${doctorName}!`);
-      // Simulating API call to backend /api/appointments/book
+      Alert.alert('Success', `Appointment booked! Joining video consultation room...`);
+      // Simulate calling backend /api/video/room
+      const mockRoomUrl = `https://meet.jit.si/youthconnect-${doctorId}-${Date.now().toString().slice(-6)}`;
+      navigation.navigate('VideoCall', { roomUrl: mockRoomUrl });
     }
   };
 
