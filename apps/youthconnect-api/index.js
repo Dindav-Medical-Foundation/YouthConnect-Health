@@ -21,6 +21,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/appointments', appointmentRoutes);
+app.use('/api/video', require('./routes/video'));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
