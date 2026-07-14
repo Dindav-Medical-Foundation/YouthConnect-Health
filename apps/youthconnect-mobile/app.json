@@ -22,6 +22,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "extra": {
       "eas": {
         "projectId": "eeffc0db-cc91-484c-876e-55f3ab498f3a"
