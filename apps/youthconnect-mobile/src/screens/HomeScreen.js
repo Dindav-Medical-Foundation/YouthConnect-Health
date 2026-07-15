@@ -14,17 +14,17 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.cardTitle}>Upcoming Appointment</Text>
         <Text style={theme.typography.body}>Dr. Emily Chen - Psychologist</Text>
         <Text style={theme.typography.caption}>Tomorrow, Oct 27, 2:30 PM</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Book')}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Consult')}>
           <Text style={styles.buttonText}>View Details</Text>
         </TouchableOpacity>
       </View>
 
       <Text style={styles.sectionTitle}>Quick Actions</Text>
       <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Book')}>
+        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Consult')}>
           <Text style={styles.actionText}>Book Consultation</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Chat')}>
+        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Chatbot')}>
           <Text style={styles.actionText}>Chat with AI</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionBox}>

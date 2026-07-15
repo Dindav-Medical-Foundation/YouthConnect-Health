@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
@@ -30,15 +29,13 @@ function TabNavigator() {
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="MainTabs" component={TabNavigator} />
-        <Stack.Screen 
-          name="VideoCall" 
-          component={VideoCallScreen} 
-          options={{ headerShown: true, title: 'Teleconsultation', headerStyle: { backgroundColor: theme.colors.primary }, headerTintColor: '#fff' }} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen 
+        name="VideoCall" 
+        component={VideoCallScreen} 
+        options={{ headerShown: true, title: 'Teleconsultation', headerStyle: { backgroundColor: theme.colors.primary }, headerTintColor: '#fff' }} 
+      />
+    </Stack.Navigator>
   );
 }

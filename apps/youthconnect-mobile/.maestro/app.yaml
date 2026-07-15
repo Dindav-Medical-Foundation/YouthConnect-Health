@@ -1,0 +1,18 @@
+appId: com.dindav.youthconnect
+---
+- launchApp
+- assertVisible: "Hello, David! 👋"
+- assertVisible: "Upcoming Appointment"
+
+# Test Navigation to Consultation
+- tapOn: "Book Consultation"
+- assertVisible: "Available Doctors"
+- assertVisible: "Dr. Anya Sharma"
+
+# Test Booking an Appointment
+- tapOn: "Book"
+- assertVisible: "Success"
+- tapOn: "OK"
+
+# Assert we are on the Video Call screen
+- assertVisible: "Teleconsultation"
