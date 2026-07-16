@@ -13,7 +13,7 @@ export default function ConsultationScreen({ navigation }) {
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      setIsOffline(!(state.isConnected && state.isInternetReachable !== false));
+      setIsOffline(!(state?.isConnected && state?.isInternetReachable !== false));
     });
     return unsubscribe;
   }, []);
