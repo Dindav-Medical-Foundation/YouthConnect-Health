@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
         end={{ x: 1, y: 1 }} 
         style={styles.headerGradient}
       >
-        <Text style={styles.headerTitle}>YouthConnect</Text>
+        <Text style={styles.headerTitle}>YouthConnect Health</Text>
         <Text style={styles.headerSubtitle}>Your Safe Space for Health 🤍</Text>
       </LinearGradient>
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     width: '47%',
     aspectRatio: 1,
     borderRadius: 20,
-    padding: 15,
+    padding: 10,
     marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     fontFamily: 'Outfit_600SemiBold',
-    fontSize: 15,
+    fontSize: 13,
     textAlign: 'center',
     color: theme.colors.text,
   }
