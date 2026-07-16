@@ -11,6 +11,7 @@ import FindClinicScreen from '../screens/FindClinicScreen';
 import RemindersScreen from '../screens/RemindersScreen';
 import EmergencyHelpScreen from '../screens/EmergencyHelpScreen';
 import MyRecordsScreen from '../screens/MyRecordsScreen';
+import ModuleDetailScreen from '../screens/ModuleDetailScreen';
 import { theme } from '../theme/theme';
 
 const Tab = createBottomTabNavigator();
@@ -60,6 +61,7 @@ export default function AppNavigator() {
       <Stack.Screen name="VideoCall" component={VideoCallScreen} options={{ title: 'Teleconsultation' }} />
       <Stack.Screen name="FamilyPlanning" component={FamilyPlanningScreen} options={{ title: 'Family Planning Quiz' }} />
       <Stack.Screen name="LearnSRH" component={LearnSRHScreen} options={{ title: 'Digital SRH Education' }} />
+      <Stack.Screen name="ModuleDetail" component={ModuleDetailScreen} options={({ route }) => ({ title: route.params?.module?.title || 'Module Detail' })} />
       <Stack.Screen name="FindClinic" component={FindClinicScreen} options={{ title: 'Find Clinic' }} />
       <Stack.Screen name="Reminders" component={RemindersScreen} options={{ title: 'Medication Reminders' }} />
       <Stack.Screen name="EmergencyHelp" component={EmergencyHelpScreen} options={{ title: 'Emergency Help' }} />
