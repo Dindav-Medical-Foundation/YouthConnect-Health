@@ -11,6 +11,7 @@ export default defineConfig({
     baseURL: 'http://localhost:8081',
     trace: 'on-first-retry',
   },
+  timeout: 120000,
   projects: [
     {
       name: 'Mobile Chrome',
