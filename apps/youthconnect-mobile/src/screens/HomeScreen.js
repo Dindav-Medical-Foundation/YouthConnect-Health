@@ -1,35 +1,51 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Feather } from '@expo/vector-icons';
 import { theme } from '../theme/theme';
+import AnimatedPressable from '../components/AnimatedPressable';
 
 export default function HomeScreen({ navigation }) {
+  const menuItems = [
+    { title: 'Consultation', route: 'Consult', icon: 'calendar', color: '#2563EB' },
+    { title: 'Learn SRH', route: 'LearnSRH', icon: 'sun', color: '#3B82F6' },
+    { title: 'Family Quiz', route: 'FamilyPlanning', icon: 'heart', color: '#60A5FA' },
+    { title: 'Chat Nurse', route: 'Chatbot', icon: 'message-circle', color: '#06B6D4' },
+    { title: 'Find Clinic', route: 'FindClinic', icon: 'map-pin', color: '#0891B2' },
+    { title: 'Reminders', route: 'Reminders', icon: 'clock', color: '#0284C7' },
+    { title: 'Emergency', route: 'EmergencyHelp', icon: 'shield', color: '#0369A1' },
+    { title: 'My Records', route: 'MyRecords', icon: 'folder', color: '#4F46E5' },
+  ];
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={theme.typography.h1}>Hello, David! 👋</Text>
-        <Text style={styles.subtitle}>Welcome back to YouthConnect.</Text>
-      </View>
+    <ScrollView style={styles.container} bounces={false}>
+      <LinearGradient 
+        colors={['#2563EB', '#06B6D4']} 
+        start={{ x: 0, y: 0 }} 
+        end={{ x: 1, y: 1 }} 
+        style={styles.headerGradient}
+      >
+        <Text style={styles.headerTitle}>YouthConnect</Text>
+        <Text style={styles.headerSubtitle}>Your Safe Space for Health 🤍</Text>
+      </LinearGradient>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Upcoming Appointment</Text>
-        <Text style={theme.typography.body}>Dr. Emily Chen - Psychologist</Text>
-        <Text style={theme.typography.caption}>Tomorrow, Oct 27, 2:30 PM</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Consult')}>
-          <Text style={styles.buttonText}>View Details</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.sectionTitle}>Quick Actions</Text>
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Consult')}>
-          <Text style={styles.actionText}>Book Consultation</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionBox} onPress={() => navigation.navigate('Chatbot')}>
-          <Text style={styles.actionText}>Chat with AI</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionBox}>
-          <Text style={styles.actionText}>Learn SRH</Text>
-        </TouchableOpacity>
+      <View style={styles.content}>
+        <Text style={styles.sectionTitle}>Quick Actions</Text>
+        
+        <View style={styles.gridContainer}>
+          {menuItems.map((item, index) => (
+            <AnimatedPressable 
+              key={index} 
+              style={styles.gridItem} 
+              onPress={() => navigation.navigate(item.route)}
+            >
+              <View style={[styles.iconContainer, { backgroundColor: item.color + '1A' }]}>
+                <Feather name={item.icon} size={28} color={item.color} />
+              </View>
+              <Text style={styles.itemTitle}>{item.title}</Text>
+            </AnimatedPressable>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -39,64 +55,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
-    padding: 20,
   },
-  header: {
-    marginTop: 20,
-    marginBottom: 30,
+  headerGradient: {
+    paddingTop: 60,
+    paddingBottom: 40,
+    paddingHorizontal: 25,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    ...theme.shadows.glow,
   },
-  subtitle: {
-    ...theme.typography.body,
-    color: theme.colors.textLight,
-    marginTop: 5,
+  headerTitle: {
+    fontFamily: 'Outfit_800ExtraBold',
+    fontSize: 28,
+    color: '#FFFFFF',
+    marginBottom: 5,
   },
-  card: {
-    backgroundColor: theme.colors.primary,
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 30,
-    ...theme.shadows.soft,
-  },
-  cardTitle: {
-    color: '#FFF',
+  headerSubtitle: {
+    fontFamily: 'Outfit_400Regular',
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#E0E7FF',
   },
-  button: {
-    backgroundColor: '#FFF',
-    paddingVertical: 10,
-    borderRadius: 20,
-    alignItems: 'center',
-    marginTop: 15,
-  },
-  buttonText: {
-    color: theme.colors.primary,
-    fontWeight: 'bold',
+  content: {
+    padding: 20,
+    marginTop: 10,
   },
   sectionTitle: {
-    ...theme.typography.h2,
-    marginBottom: 15,
+    fontFamily: 'Outfit_700Bold',
+    fontSize: 20,
+    color: theme.colors.text,
+    marginBottom: 20,
   },
-  actionsContainer: {
+  gridContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  actionBox: {
+  gridItem: {
     backgroundColor: theme.colors.surface,
+    width: '47%',
+    aspectRatio: 1,
+    borderRadius: 20,
     padding: 15,
-    borderRadius: 15,
-    flex: 1,
-    marginHorizontal: 5,
+    marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 100,
     ...theme.shadows.soft,
   },
-  actionText: {
-    ...theme.typography.body,
-    fontWeight: '600',
+  iconContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+  },
+  itemTitle: {
+    fontFamily: 'Outfit_600SemiBold',
+    fontSize: 15,
     textAlign: 'center',
-    color: theme.colors.primary,
+    color: theme.colors.text,
   }
 });
