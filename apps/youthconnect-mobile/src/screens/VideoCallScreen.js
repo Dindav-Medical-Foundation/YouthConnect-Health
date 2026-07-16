@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function VideoCallScreen({ route, navigation }) {
@@ -8,16 +8,24 @@ export default function VideoCallScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <WebView
-        source={{ uri: roomUrl }}
-        style={styles.webview}
-        startInLoadingState={true}
-        renderLoading={() => <ActivityIndicator size="large" color="#0052cc" style={styles.loader} />}
-        mediaPlaybackRequiresUserAction={false}
-        allowsInlineMediaPlayback={true}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-      />
+      {Platform.OS === 'web' ? (
+        <iframe 
+          src={roomUrl} 
+          style={{ width: '100%', height: '100%', border: 'none' }}
+          allow="camera; microphone; fullscreen"
+        />
+      ) : (
+        <WebView
+          source={{ uri: roomUrl }}
+          style={styles.webview}
+          startInLoadingState={true}
+          renderLoading={() => <ActivityIndicator size="large" color="#0052cc" style={styles.loader} />}
+          mediaPlaybackRequiresUserAction={false}
+          allowsInlineMediaPlayback={true}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+        />
+      )}
     </View>
   );
 }
