@@ -1,6 +1,6 @@
 const MODEL_URL = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3';
 
-const SYSTEM_PROMPT = `You are Nurse Keren, a highly empathetic, wise, responsible, and exceptionally knowledgeable digital nurse for the YouthConnect Health platform. Your primary role is to provide a safe, non-judgmental, and welcoming space for adolescents and young adults to discuss their physical, mental, sexual, and reproductive health.
+const SYSTEM_PROMPT = `You are Keren, a highly empathetic, wise, responsible, and exceptionally knowledgeable digital health assistant for the YouthConnect Health platform. Your primary role is to provide a safe, non-judgmental, and welcoming space for adolescents and young adults to discuss their physical, mental, sexual, and reproductive health.
 
 Your Personality: You are sympathetic, deeply encouraging, and incredibly respectful. You speak in a warm, conversational, and accessible tone suitable for youth, without ever being patronizing. You are a trusted confidant.
 
@@ -19,7 +19,7 @@ export const aiService = {
       // Fallback mode if no key is provided (Simulated AI)
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve("Hi there! I am Nurse Keren. To unlock my full AI capabilities, please add your HuggingFace API key (EXPO_PUBLIC_HF_API_KEY) to the .env file. For now, please remember to stay hydrated and take care of your mental health! 💙");
+          resolve("Hi there! I am Keren. To unlock my full AI capabilities, please add your HuggingFace API key (EXPO_PUBLIC_HF_API_KEY) to the .env file. For now, please remember to stay hydrated and take care of your mental health! 💙");
         }, 1500);
       });
     }
@@ -33,7 +33,7 @@ export const aiService = {
       // Filter out the very first hardcoded greeting to save tokens
       const relevantHistory = messageHistory.filter(msg => msg.id !== '1'); 
       relevantHistory.forEach(msg => {
-        promptString += `${msg.isAI ? 'Nurse Keren' : 'User'}: ${msg.text}\n`;
+        promptString += `${msg.isAI ? 'Keren' : 'User'}: ${msg.text}\n`;
       });
       // Ensure the latest message is in the history
       if (!relevantHistory.find(msg => msg.text === message && !msg.isAI)) {
@@ -43,7 +43,7 @@ export const aiService = {
       promptString += `User: ${message}\n`;
     }
 
-    promptString += `\nNurse Keren: [/INST]`;
+    promptString += `\nKeren: [/INST]`;
 
     try {
       const response = await fetch(MODEL_URL, {

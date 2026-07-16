@@ -23,7 +23,7 @@ export default function ChatbotScreen() {
       if (stored) {
         setMessages(JSON.parse(stored));
       } else {
-        setMessages([{ id: '1', text: 'Hi! 👋 I am Nurse Keren, your Health Assistant. How can I help you today?', isAI: true }]);
+        setMessages([{ id: '1', text: 'Hi! 👋 I am Keren, your Health Assistant. How can I help you today?', isAI: true }]);
       }
     } catch (e) {
       console.error('Failed to load chat history', e);
