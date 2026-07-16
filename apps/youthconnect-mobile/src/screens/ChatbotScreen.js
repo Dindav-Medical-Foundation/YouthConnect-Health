@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator, Switch } from 'react-native';
 import { theme } from '../theme/theme';
 import { aiService } from '../services/aiService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,6 +10,7 @@ export default function ChatbotScreen() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [rememberHistory, setRememberHistory] = useState(false);
   const flatListRef = useRef();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function ChatbotScreen() {
       if (stored) {
         setMessages(JSON.parse(stored));
       } else {
-        setMessages([{ id: '1', text: 'Hi David! 👋 I am your Health Assistant. How can I help you today?', isAI: true }]);
+        setMessages([{ id: '1', text: 'Hi! 👋 I am Nurse Keren, your Health Assistant. How can I help you today?', isAI: true }]);
       }
     } catch (e) {
       console.error('Failed to load chat history', e);
@@ -51,7 +52,8 @@ export default function ChatbotScreen() {
     setIsTyping(true);
     
     // Call the AI Service
-    const aiResponseText = await aiService.sendMessage(userText);
+    const messagesToPass = rememberHistory ? updatedMessages : [userMsg];
+    const aiResponseText = await aiService.sendMessage(userText, messagesToPass);
     
     const aiMsg = { id: (Date.now() + 1).toString(), text: aiResponseText, isAI: true };
     const finalMessages = [...updatedMessages, aiMsg];
@@ -77,6 +79,15 @@ export default function ChatbotScreen() {
         contentContainerStyle={styles.chatList}
         onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
       />
+      <View style={styles.toggleContainer}>
+        <Text style={styles.toggleText}>Remember Conversation History</Text>
+        <Switch 
+          value={rememberHistory} 
+          onValueChange={setRememberHistory} 
+          trackColor={{ false: '#CBD5E1', true: theme.colors.primary }}
+          thumbColor={'#FFFFFF'}
+        />
+      </View>
       {isTyping && (
         <View style={styles.typingIndicator}>
           <ActivityIndicator size="small" color={theme.colors.primary} />
@@ -113,5 +124,7 @@ const styles = StyleSheet.create({
   inputContainer: { flexDirection: 'row', padding: 15, backgroundColor: theme.colors.surface, borderTopWidth: 1, borderColor: '#E2E8F0' },
   input: { flex: 1, backgroundColor: theme.colors.background, borderRadius: 20, paddingHorizontal: 15, paddingVertical: 10, marginRight: 10, fontFamily: 'Outfit_400Regular' },
   sendButton: { backgroundColor: theme.colors.primary, justifyContent: 'center', paddingHorizontal: 20, borderRadius: 20 },
-  sendButtonText: { color: '#FFF', fontFamily: 'Outfit_700Bold' }
+  sendButtonText: { color: '#FFF', fontFamily: 'Outfit_700Bold' },
+  toggleContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 10, borderTopWidth: 1, borderColor: '#E2E8F0' },
+  toggleText: { ...theme.typography.body, color: theme.colors.textLight, fontSize: 13 }
 });
