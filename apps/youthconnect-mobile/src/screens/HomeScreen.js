@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
         style={styles.headerGradient}
       >
         <Text style={styles.headerTitle}>YouthConnect Health</Text>
-        <Text style={styles.headerSubtitle}>Your Safe Space for Health 🤍</Text>
+        <Text style={styles.headerSubtitle}>Your safe space for sexual and reproductive health</Text>
       </LinearGradient>
 
       <View style={styles.content}>
@@ -42,7 +42,7 @@ export default function HomeScreen({ navigation }) {
               <View style={[styles.iconContainer, { backgroundColor: item.color + '1A' }]}>
                 <Feather name={item.icon} size={28} color={item.color} />
               </View>
-              <Text style={styles.itemTitle}>{item.title}</Text>
+              <Text style={styles.itemTitle} numberOfLines={1} adjustsFontSizeToFit>{item.title}</Text>
             </AnimatedPressable>
           ))}
         </View>
