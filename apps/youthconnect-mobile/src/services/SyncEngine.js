@@ -7,7 +7,7 @@ const CACHE_KEY = '@srh_cache';
 export const SyncEngine = {
   async isOnline() {
     const state = await NetInfo.fetch();
-    return state.isConnected && state.isInternetReachable !== false;
+    return state?.isConnected && state?.isInternetReachable !== false;
   },
 
   async enqueueAction(actionType, payload) {
