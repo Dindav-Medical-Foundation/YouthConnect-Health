@@ -19,7 +19,7 @@ export default defineConfig({
     }
   ],
   webServer: {
-    command: 'npx expo start --web',
+    command: 'npx -y serve dist -p 8081',
     url: 'http://localhost:8081',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
