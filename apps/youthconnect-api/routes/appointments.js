@@ -1,9 +1,8 @@
 const express = require('express');
 const authenticateToken = require('../middleware/auth');
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('../db');
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // Get available doctors (Mock data for prototype)
 router.get('/doctors', authenticateToken, (req, res) => {
