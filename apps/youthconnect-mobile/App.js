@@ -4,14 +4,17 @@ import AppNavigator from './src/navigation/AppNavigator';
 import { theme } from './src/theme/theme';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { useFonts, Outfit_400Regular, Outfit_600SemiBold, Outfit_700Bold } from '@expo-google-fonts/outfit';
+import { useFonts, Inter_300Light, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold, Inter_800ExtraBold } from '@expo-google-fonts/inter';
 import { ActivityIndicator, View } from 'react-native';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    Outfit_400Regular,
-    Outfit_600SemiBold,
-    Outfit_700Bold,
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
   });
 
   if (!fontsLoaded) {
